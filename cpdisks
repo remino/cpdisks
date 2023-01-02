@@ -102,12 +102,13 @@ _cp_disk() {
 
 	cp -av "$src" "$dst/$name"
 
-	if ! _exists diskutil
+	if _exists diskutil
 	then
 		_echo "Ejecting disk..."
 		diskutil eject "$disk"
 	else
-		_echo "Eject the disk manually."
+		printf "Eject the disk manually. Hit Enter to continue."
+		read -r pause
 	fi
 
 	_echo "Insert next disk."
